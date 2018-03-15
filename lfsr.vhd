@@ -1,7 +1,6 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
-use std.textio.all;
 
 -- this is an asynchronoous parallel-in serial-out LFSR
 entity lfsr is
@@ -25,7 +24,6 @@ BEGIN
   -- a change in either of the signals: clk, ld, data
   -- is detected. this is the "sensitivity list"
   PROCESS(clk, ld, data)
-  		--variable isig: unsigned ( 15 downto 0) := (others => '0');
   BEGIN
     -- note that if 'ld = 1' then, regardless of clk the LFSR
     -- will read external data; that's why it's __asynchronous__
@@ -37,22 +35,17 @@ BEGIN
     elsif(clk'event and clk = '1')
     then
       -- cyclic shift - as simple as that
-	    q(15 downto 1) <= q(14 downto 0);
+	    q(16 downto 1) <= q(15 downto 0);
       -- taps at bits 15, 14, 13 and 4
-	    q(0) <= not(q(15) XOR q(14) XOR q(13) XOR q(4));
-	    writeline(output, q(0));
-	    
-	    
+	    q(0) <= not(q(16) XOR q(14) XOR q(13) XOR q(1));
     end if;
-    --write(my_line, data);
-	 --writeline(output, my_line);
   END PROCESS;
 
-  -- this is not a part of the process - this assignment is
+  -- this is not primary unit "std_logic_unsigned" not found in library "ieeea part of the process -- this assignment is
   -- permanent, i.e. "it's always there" - just like a wire 
   -- connecting MSB to the output
   R <= q(15);
-  --write(output, R);
+  --writeline(output, R);
 	
 END first;
 
@@ -71,6 +64,7 @@ BEGIN
 	    q(15 downto 1) <= q(14 downto 0);
       -- taps at bits 15, 10, 9 and 1
 	    q(0) <= not(q(15) XOR q(10) XOR q(9) XOR q(1));
+	    --writeline(output, q(0));
     end if;
   END PROCESS;
 

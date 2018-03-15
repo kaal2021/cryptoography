@@ -13,7 +13,9 @@ architecture complex of lfsr_tb is
   -- clock signal
   signal clock : std_logic :=  '0';
   -- lines for loading-up LFSRs
-  signal q1,q2 : std_logic_vector(15 downto 0) := (others => '0');
+  signal q1, q2 : std_logic_vector(15 downto 0) := (others => '1');
+  -- signal q2 : std_logic_vector(15 downto 0) := (others => '1');
+  
   -- signal to start loading LFSRs
   signal load  : std_logic := '0';
   -- outputs from LFSRs
